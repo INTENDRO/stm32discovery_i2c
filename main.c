@@ -55,7 +55,7 @@ void wait_1ms(uint16_t u16Factor) // using timer 4
 
 int main(void)
 {
-	init_i2c3();
+	//init_i2c3();
 	
 	RCC->AHB1ENR = RCC_AHB1ENR_GPIOGEN | RCC_AHB1ENR_GPIOAEN;
 	
@@ -73,9 +73,9 @@ int main(void)
 	
 	while(!(GPIOA->IDR & GPIO_IDR_ID0));
 	
-	I2C3->CR1 |= I2C_CR1_START;
-	wait_1ms(1);
-	I2C3->CR1 |= I2C_CR1_STOP;
+	//I2C3->CR1 |= I2C_CR1_START;
+	//wait_1ms(10);
+	//I2C3->CR1 |= I2C_CR1_STOP;
 	
 
 	while(1)
