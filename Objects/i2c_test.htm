@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\i2c_test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\i2c_test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue May 22 12:34:24 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Tue May 22 15:35:17 2018
 <BR><P>
 <H3>Maximum Stack Usage =          8 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -658,21 +658,21 @@ Global Symbols
 <P><STRONG><a name="[66]"></a>SystemInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f429xx.o(.text)
 </UL>
+<P><STRONG><a name="[7e]"></a>i2c3_start</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, main.o(i.i2c3_start))
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
 <P><STRONG><a name="[7d]"></a>init_i2c3</STRONG> (Thumb, 188 bytes, Stack size 0 bytes, main.o(i.init_i2c3))
 <BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[75]"></a>main</STRONG> (Thumb, 278 bytes, Stack size 8 bytes, main.o(i.main))
+<P><STRONG><a name="[75]"></a>main</STRONG> (Thumb, 216 bytes, Stack size 8 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = main
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wait_1ms
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_i2c3
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_i2c3
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;i2c3_start
 </UL>
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
-</UL>
-
-<P><STRONG><a name="[7e]"></a>wait_1ms</STRONG> (Thumb, 144 bytes, Stack size 0 bytes, main.o(i.wait_1ms))
-<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[6f]"></a>_fp_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
