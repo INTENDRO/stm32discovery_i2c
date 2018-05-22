@@ -4,7 +4,7 @@
 void init_i2c3(void) //SCL: PA8(AF4) SDA: PC9(AF4)
 {
 	RCC->APB1ENR |= RCC_APB1ENR_I2C3EN;
-	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOAEN;
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOCEN;
 
 	GPIOA->OTYPER |= GPIO_OTYPER_OT8;
 	GPIOA->AFR[1] &= ~GPIO_AFRH_AFSEL8_Msk;
@@ -18,6 +18,7 @@ void init_i2c3(void) //SCL: PA8(AF4) SDA: PC9(AF4)
 	GPIOC->MODER &= ~GPIO_MODER_MODE9_Msk;
 	GPIOC->MODER |= GPIO_MODER_MODE9_1;
 
+	I2C3->CR1 = I2C_CR1_SWRST;
 	I2C3->CR1 = 0;
 	I2C3->CR2 = 0x0010;
 	I2C3->CCR = 80;
@@ -55,7 +56,14 @@ void wait_1ms(uint16_t u16Factor) // using timer 4
 
 int main(void)
 {
-	//init_i2c3();
+	volatile uint16_t u16Temp;
+	
+	init_i2c3();
+	u16Temp = I2C3->CR1;
+	u16Temp = I2C3->CR2;
+	u16Temp = I2C3->CCR;
+	u16Temp = I2C3->TRISE;
+	u16Temp = I2C3->SR2;
 	
 	RCC->AHB1ENR = RCC_AHB1ENR_GPIOGEN | RCC_AHB1ENR_GPIOAEN;
 	
@@ -72,6 +80,12 @@ int main(void)
 	GPIOA->PUPDR &= ~GPIO_PUPDR_PUPD0_Msk;
 	
 	while(!(GPIOA->IDR & GPIO_IDR_ID0));
+	u16Temp = I2C3->SR2;
+	I2C3->CR1 |= I2C_CR1_START;
+	u16Temp = I2C3->SR2;
+	wait_1ms(10);
+	I2C3->CR1 |= I2C_CR1_STOP;
+	u16Temp = I2C3->SR2;
 	
 	while(1)
 	{
