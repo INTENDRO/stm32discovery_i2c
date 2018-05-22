@@ -80,12 +80,13 @@ int main(void)
 	GPIOA->PUPDR &= ~GPIO_PUPDR_PUPD0_Msk;
 	
 	while(!(GPIOA->IDR & GPIO_IDR_ID0));
-	u16Temp = I2C3->SR2;
 	I2C3->CR1 |= I2C_CR1_START;
+	u16Temp = I2C3->SR1;
+	I2C3->DR = 0x81;
+	u16Temp = I2C3->SR1;
 	u16Temp = I2C3->SR2;
 	wait_1ms(10);
 	I2C3->CR1 |= I2C_CR1_STOP;
-	u16Temp = I2C3->SR2;
 	
 	while(1)
 	{
